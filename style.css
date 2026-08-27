@@ -37,7 +37,7 @@
   --glow-blue:   0 0 40px rgba(59, 130, 246, 0.35);
   --glow-green:  0 0 40px rgba(16, 185, 129, 0.35);
 
-  --font-display: 'Syne', sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-body:    'Plus Jakarta Sans', sans-serif;
 
   --r-sm: 10px;
@@ -46,6 +46,43 @@
   --r-xl: 32px;
   --r-full: 9999px;
 }
+
+.developer-topbar {
+  background: linear-gradient(90deg, #1e40af, #047857);
+  color: #ffffff;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 0.4rem 1rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 210;
+}
+body.light .developer-topbar {
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: var(--pink);
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--r-sm);
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 0.2rem;
+}
+.btn-delete:hover {
+  background: rgba(236, 72, 153, 0.15);
+  transform: scale(1.1);
+}
+
 
 body.light {
   --bg-base:    #f0f9ff;
@@ -114,30 +151,31 @@ body.light .bg-orb { filter: blur(60px); }
 
 .bg-orb-1 {
   width: 500px; height: 500px;
-  background: radial-gradient(circle, #1d4ed8 20%, #0d9488 80%);
-  top: -150px; left: -100px;
-  opacity: 0.25;
+  background: radial-gradient(circle, #1e40af 10%, #0d9488 70%);
+  top: -120px; left: -80px;
+  opacity: 0.4;
   animation-duration: 22s;
 }
 .bg-orb-2 {
   width: 450px; height: 450px;
-  background: radial-gradient(circle, #059669 20%, #2563eb 80%);
-  bottom: -100px; right: -80px;
-  opacity: 0.22;
+  background: radial-gradient(circle, #059669 15%, #2563eb 80%);
+  bottom: -80px; right: -50px;
+  opacity: 0.35;
   animation-duration: 17s;
   animation-delay: -7s;
 }
 .bg-orb-3 {
-  width: 280px; height: 280px;
-  background: radial-gradient(circle, #7c3aed 30%, #db2777 80%);
-  top: 35%; left: 60%;
-  opacity: 0.14;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, #7c3aed 20%, #db2777 80%);
+  top: 30%; left: 55%;
+  opacity: 0.25;
   animation-duration: 25s;
   animation-delay: -13s;
 }
-body.light .bg-orb-1 { opacity: 0.08; }
-body.light .bg-orb-2 { opacity: 0.07; }
-body.light .bg-orb-3 { opacity: 0.05; }
+body.light .bg-orb-1 { opacity: 0.12; }
+body.light .bg-orb-2 { opacity: 0.1; }
+body.light .bg-orb-3 { opacity: 0.08; }
+
 
 @keyframes orbDrift {
   0%   { transform: translate(0, 0) scale(1); }
@@ -329,11 +367,11 @@ body.light .app-header {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 7vw, 4.2rem);
+  font-size: clamp(1.6rem, 5.5vw, 3rem);
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.15;
   margin-bottom: 0.5rem;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 
 /* Multi-color animated gradient headline */
@@ -353,11 +391,11 @@ body.light .app-header {
 
 .hero-accent {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 3vw, 1.6rem);
+  font-size: clamp(0.95rem, 2.5vw, 1.3rem);
   font-weight: 800;
   color: var(--yellow);
   display: block;
-  margin-top: 0.3rem;
+  margin-top: 0.4rem;
   letter-spacing: 0;
   text-shadow: 0 0 20px rgba(251,191,36,0.4);
 }

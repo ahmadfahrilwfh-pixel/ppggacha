@@ -2,7 +2,7 @@
 // PPG 70th Anniversary Doorprize · Prestige Night Edition
 import {
   db, isConfigured,
-  collection, query, orderBy, onSnapshot, updateDoc, doc, serverTimestamp
+  collection, query, orderBy, onSnapshot, updateDoc, deleteDoc, doc, serverTimestamp
 } from "./firebase-config.js";
 
 // ── DOM ──────────────────────────────────────────────────────
@@ -255,7 +255,7 @@ function refreshUI() {
 function renderAdminList() {
   const q = adminSearch?.value.toLowerCase().trim() ?? "";
   const filtered = allParticipants.filter(p =>
-    [p.name,p.nik,p.branch,p.uniqueId].some(v => v?.toLowerCase().includes(q))
+    [p.name, p.branch, p.uniqueId].some(v => v?.toLowerCase().includes(q))
   );
 
   if (!filtered.length) {
@@ -269,17 +269,48 @@ function renderAdminList() {
     <div class="part-item">
       <div class="part-item-left">
         <div class="part-name">${esc(p.name)}</div>
-        <div class="part-meta">NIK: ${esc(p.nik)} &nbsp;·&nbsp; ${esc(p.branch)}</div>
+        <div class="part-meta">${esc(p.branch)}</div>
       </div>
-      <div class="part-item-right">
-        <span class="ticket-chip">${p.uniqueId ?? "DP70-?"}</span>
-        <span class="status-chip ${p.won ? 'won':'eligible'}">${p.won ? "Menang":"Eligible"}</span>
+      <div class="part-item-right" style="align-items: flex-end;">
+        <span class="ticket-chip">${p.uniqueId ?? "RW5-?"}</span>
+        <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.2rem;">
+          <span class="status-chip ${p.won ? 'won':'eligible'}">${p.won ? "Menang":"Eligible"}</span>
+          <button class="btn-delete" data-id="${p.id}" title="Hapus Peserta">🗑️</button>
+        </div>
       </div>
     </div>
   `).join("");
 }
 
 adminSearch?.addEventListener("input", renderAdminList);
+
+// ── DELETE PARTICIPANT LOGIC ─────────────────────────────────
+adminPartList.addEventListener("click", async e => {
+  const btn = e.target.closest(".btn-delete");
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const participant = allParticipants.find(p => p.id === id);
+  if (!participant) return;
+
+  if (confirm(`Apakah Anda yakin ingin menghapus "${participant.name}" dari daftar peserta?`)) {
+    try {
+      if (isConfigured && db) {
+        await deleteDoc(doc(db, "participants", id));
+        console.log("Deleted document from Firestore:", id);
+      } else {
+        const list = getLocal();
+        const updated = list.filter(p => p.id !== id);
+        localStorage.setItem(LS_KEY, JSON.stringify(updated));
+        window.dispatchEvent(new Event("ppg_db_updated"));
+        console.log("Deleted participant locally:", id);
+      }
+    } catch (err) {
+      console.error("Gagal menghapus peserta:", err);
+      alert("Terjadi kesalahan saat menghapus peserta. Silakan coba lagi.");
+    }
+  }
+});
+
 
 // ============================================================
 // MULTI-WINNER GACHA ENGINE

@@ -22,6 +22,9 @@
     <div class="sparkles" id="sparkles-container"></div>
   </div>
 
+  <!-- ── Top Credit Bar ── -->
+  <div class="developer-topbar">Developer By Ahmad Fahril</div>
+
   <!-- ── Header ── -->
   <header class="app-header">
     <div class="header-inner">
@@ -33,7 +36,6 @@
         </div>
       </div>
       <div class="nav-actions">
-        <a href="admin.html" class="btn-nav">Admin</a>
         <button class="btn-icon" id="theme-toggle" title="Ubah Tema" aria-label="Toggle Tema">☀️</button>
       </div>
     </div>
@@ -67,12 +69,6 @@
         </div>
 
         <form id="register-form" class="form-stack" autocomplete="off">
-          <div class="field-block">
-            <label class="field-lbl" for="nik-input">NIK / No. KTP</label>
-            <input type="text" id="nik-input" name="nik" class="field-inp"
-              placeholder="Masukkan NIK / Nomor KTP" required minlength="3">
-          </div>
-
           <div class="field-block">
             <label class="field-lbl" for="name-input">Nama Lengkap</label>
             <input type="text" id="name-input" name="name" class="field-inp"
@@ -132,9 +128,6 @@
           <span>Nama</span><span id="modal-name">—</span>
         </div>
         <div class="ticket-row">
-          <span>NIK</span><span id="modal-nik">—</span>
-        </div>
-        <div class="ticket-row">
           <span>RT / Alamat</span><span id="modal-branch">—</span>
         </div>
       </div>
@@ -144,6 +137,35 @@
       </button>
     </div>
   </div>
+
+  <!-- Real-time Winner Notification Modal for active users -->
+  <div class="modal-overlay" id="winner-announcement-modal">
+    <div class="modal-box" style="border-color: var(--green-bright); box-shadow: var(--glow-green);">
+      <div class="modal-icon" style="background: var(--green-bright);">🏆</div>
+      <h3 class="modal-title" style="color: var(--green-light);">Selamat Kepada Pemenang!</h3>
+      <p class="modal-desc">Baru saja diundi pemenang doorprize:</p>
+
+      <div class="ticket-card" style="border-color: var(--green-bright); background: rgba(16, 185, 129, 0.1);">
+        <div class="ticket-number" id="announcement-uid" style="color: #fff; text-shadow: 0 0 15px var(--green-bright);">RW5-00000</div>
+        <div class="ticket-row" style="border-top-color: rgba(16, 185, 129, 0.2);">
+          <span>Nama Pemenang</span><span id="announcement-name" style="color: var(--green-light); font-weight: 800;">—</span>
+        </div>
+        <div class="ticket-row" style="border-top-color: rgba(16, 185, 129, 0.2);">
+          <span>RT / Alamat</span><span id="announcement-branch">—</span>
+        </div>
+      </div>
+
+      <button type="button" class="btn-primary" id="close-announcement-btn" style="background: var(--green-bright); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
+        Selamat! 🥳
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Footer Credit ── -->
+  <footer class="app-footer" style="text-align: center; padding: 2rem 1rem; border-top: 1px solid var(--border-dim); margin-top: 3rem; font-size: 0.85rem; color: var(--text-dim);">
+    <p style="margin-bottom: 0.5rem;">Dolan Bareng RW 5 &copy; 2026</p>
+    <p style="color: var(--text-sub); font-weight: 600;">Developer By Ahmad Fahril</p>
+  </footer>
 
   <script type="module" src="firebase-config.js"></script>
   <script type="module" src="app.js"></script>
