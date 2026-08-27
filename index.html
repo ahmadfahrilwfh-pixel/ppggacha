@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dolan Bareng RW 5 – Daftar Doorprize</title>
+  <meta name="description" content="Portal Pendaftaran Doorprize Dolan Bareng RW 5. Scan dan daftar sekarang!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Background ── -->
+  <div class="bg-scene" aria-hidden="true">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+    <div class="bg-dots"></div>
+    <!-- Sparkles -->
+    <div class="sparkles" id="sparkles-container"></div>
+  </div>
+
+  <!-- ── Header ── -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <div class="brand-pill">🎉 RW 5</div>
+        <div class="brand-text">
+          <div class="brand-title">Dolan Bareng RW 5</div>
+          <div class="brand-sub">Portal Doorprize Resmi</div>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a href="admin.html" class="btn-nav">Admin</a>
+        <button class="btn-icon" id="theme-toggle" title="Ubah Tema" aria-label="Toggle Tema">☀️</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="hero-section">
+    <div class="hero-eyebrow">
+      <span>✨</span>
+      <span>Ayo Ikutan Doorprize!</span>
+      <span>✨</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="hero-title-main">Dolan Bareng RW 5</span>
+    </h1>
+    <span class="hero-accent">🏘️ Doorprize Berhadiah Menarik!</span>
+    <p class="hero-subtitle">
+      Scan QR Code ini dan daftarkan diri kamu sekarang. Siapa tau kamu yang beruntung!
+    </p>
+  </section>
+
+  <!-- ── Main Content ── -->
+  <main class="page-container">
+    <div class="two-col-grid">
+
+      <!-- Form Pendaftaran -->
+      <section class="glass-card">
+        <div class="card-head">
+          <h2 class="card-title-main">📝 Form Pendaftaran</h2>
+          <p class="card-subtitle-main">Isi data kamu, gratis dan langsung terdaftar!</p>
+        </div>
+
+        <form id="register-form" class="form-stack" autocomplete="off">
+          <div class="field-block">
+            <label class="field-lbl" for="nik-input">NIK / No. KTP</label>
+            <input type="text" id="nik-input" name="nik" class="field-inp"
+              placeholder="Masukkan NIK / Nomor KTP" required minlength="3">
+          </div>
+
+          <div class="field-block">
+            <label class="field-lbl" for="name-input">Nama Lengkap</label>
+            <input type="text" id="name-input" name="name" class="field-inp"
+              placeholder="Masukkan nama kamu" required>
+          </div>
+
+          <div class="field-block">
+            <label class="field-lbl" for="branch-input">RT / Alamat</label>
+            <input type="text" id="branch-input" name="branch" class="field-inp"
+              placeholder="Contoh: RT 01 / Blok A No. 5" required>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn-primary">
+            <span id="submit-btn-text">🚀 Daftarkan Saya!</span>
+          </button>
+
+          <div id="form-alert" class="alert-err"></div>
+        </form>
+      </section>
+
+      <!-- Daftar Peserta -->
+      <section class="glass-card">
+        <div class="card-head">
+          <h2 class="card-title-main">👥 Peserta Terdaftar</h2>
+          <p class="card-subtitle-main">Update real-time langsung dari database</p>
+        </div>
+
+        <div class="live-badge-row">
+          <div class="live-badge">
+            <span class="blink-dot"></span>
+            <span id="live-count">0 Peserta</span>
+          </div>
+          <input type="text" id="search-input" class="search-inp" placeholder="🔍 Cari nama atau RT...">
+        </div>
+
+        <div class="part-list" id="part-list">
+          <div style="text-align:center;color:var(--text-dim);padding:2.5rem;font-size:.875rem;">
+            Memuat data...
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ── Modal Sukses ── -->
+  <div class="modal-overlay" id="success-modal">
+    <div class="modal-box">
+      <div class="modal-icon">🎊</div>
+      <h3 class="modal-title">Yeay, Berhasil!</h3>
+      <p class="modal-desc">Kamu sudah terdaftar! Simpan nomor undian ini baik-baik ya.</p>
+
+      <div class="ticket-card">
+        <div class="ticket-eyebrow">Nomor Undian Kamu</div>
+        <div class="ticket-number" id="modal-uid">RW5-00000</div>
+        <div class="ticket-row">
+          <span>Nama</span><span id="modal-name">—</span>
+        </div>
+        <div class="ticket-row">
+          <span>NIK</span><span id="modal-nik">—</span>
+        </div>
+        <div class="ticket-row">
+          <span>RT / Alamat</span><span id="modal-branch">—</span>
+        </div>
+      </div>
+
+      <button type="button" class="btn-primary" id="close-modal-btn">
+        Oke, Siap! 👍
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
+
+  <!-- Sparkle generator -->
+  <script>
+    const container = document.getElementById('sparkles-container');
+    for (let i = 0; i < 50; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.cssText = `
+        left:${Math.random()*100}%;
+        top:${Math.random()*100}%;
+        --dur:${2 + Math.random()*4}s;
+        animation-delay:${Math.random()*5}s;
+        width:${Math.random() > 0.7 ? 4 : 2}px;
+        height:${Math.random() > 0.7 ? 4 : 2}px;
+        background:${['#93c5fd','#6ee7b7','#fbbf24','#fff','#c4b5fd'][Math.floor(Math.random()*5)]};
+      `;
+      container.appendChild(s);
+    }
+  </script>
+</body>
+</html>
